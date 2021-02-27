@@ -1,0 +1,35 @@
+<form method="post" action="/" enctype="application/x-www-form-urlencoded">
+
+  <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
+    <label for="name">Nafn*</label>
+    <input type="text" name="name" id="name" value="<%= formData.name %>" class="">
+  </div>
+
+  <div class="field<%= locals.isInvalid('nationalId', errors) ?  ' field--invalid' : '' %>">
+    <label for="nationalId">Kennitala*</label>
+    <input type="text" name="nationalId" id="nationalId" value="<%= formData.nationalId %>" class="">
+  </div>
+
+  <div class="field field--textarea<%= locals.isInvalid('comment', errors) ?  ' field--invalid' : '' %>">
+    <label for="comment">Athugasemd:</label>
+    <textarea name="comment" id="comment"><%= formData.comment %></textarea>
+  </div>
+
+  <div class="field field--checkbox<%= locals.isInvalid('anonymous', errors) ?  ' field--invalid' : '' %>">
+    <label for="anonymous">
+      <input type="checkbox" name="anonymous" id="anonymous" <%= formData.anonymous === 'on' ? 'checked' : '' %> class="">
+      Ekki birta nafn á lista
+    </label>
+  </div>
+
+  <% if (errors.length > 0) { %>
+    <h2 class="errors__title">Villur við undirskrift:</h2>
+    <ul class="errors">
+      <% errors.forEach((error) => { %>
+        <li class="error"><label for="<%= error.param %>"><%= error.msg %></label></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <button>Skrifa undir</button>
+</form>
